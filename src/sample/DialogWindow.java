@@ -44,7 +44,7 @@ public class DialogWindow {
         dialogGroup = new Group();
         pane = new GridPane();
 
-        labelWindow = new Label("Vigenere cipher");
+        labelWindow = new Label("Система шифрування Віженера");
         labelWindow.setFont(font);
 
         hbox = new HBox();
@@ -57,15 +57,21 @@ public class DialogWindow {
         avatarIV.setStyle("-fx-margin: 15px;");
 
         descr = new Label();
-        descr.setText("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since " + "\n" +
-                "the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries" + "\n" +
-                "only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release" + "\n" +
-                " of Letraset It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop" + "\n" +
-                " publishing software like Aldus PageMaker including versions of Lorem Ipsum.");
+        descr.setText("Даний шифр багатоалфавітної заміни можна описати таблицею шифрування. Для російського алфавіту вона має\n" +
+                "вигляд, показаний у додатка Д. Таблиця Віжинера використовується  для шифрування і розшифрування.\n" +
+                "Таблиця має три входи:\n" +
+                "- верхній рядок підкреслених символів, що застосовується для зчитування чергової літери \n" +
+                "- початкового відкритого тексту\n" +
+                "- крайній лівий стовпець ключа\n" +
+                "Послідовність ключів зазвичай отримують з числових значень літер ключового слова. При шифруванні початкового\n" +
+                "повідомлення його вписують в рядок, а під ним записують ключове слово або фразу. Якщо ключ виявився коротшим,\n" +
+                "ніж повідомлення, то його циклічно повторюють. В процесі шифрування знаходять у верхньому рядку таблиці чергову\n" +
+                "букву початкового тексту і в лівому стовпці чергове значення ключа. Чергова літера шифротексту знаходиться на\n" +
+                "перетині стовпця, що визначається літерою, яка шифрується, і рядка, що відповідає значенню ключа. ");
         descr.setFont(fontDescr);
 
         studentInfo = new Label();
-        studentInfo.setText("    info about student");
+        studentInfo.setText("    ");
         studentInfo.setFont(fontInfo);
         Button button = new Button("Confirm");
 
