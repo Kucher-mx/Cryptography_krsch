@@ -8,6 +8,7 @@ public class Main extends Application {
 
     static DialogWindow dialogWindow;
     static Stage primaryStage;
+    static Stage newWindow = new Stage();
 
 
     public static void setSetupStage() throws FileNotFoundException {
