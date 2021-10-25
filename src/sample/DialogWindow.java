@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.media.AudioClip;
 import javafx.scene.text.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
@@ -22,11 +23,13 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.awt.*;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.regex.Pattern;
 
 public class DialogWindow {
@@ -42,6 +45,9 @@ public class DialogWindow {
     private InfoAlg InfoAlgWindow = new InfoAlg();
     private HBox wordInputWrapper = new HBox();
     private HBox keyInputWrapper = new HBox();
+    private HBox ButtonsWrapper = new HBox();
+    private Button save = new Button("Save");
+    private Encrypt encryptinst = new Encrypt();
 
     public DialogWindow() throws FileNotFoundException {
         Font fontEncrypted = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 16);
@@ -68,12 +74,13 @@ public class DialogWindow {
                 if(wordToEncrypt.getText() == "" || key.getText() == "" ||
                     Pattern.matches(".*\\p{InCyrillic}.*", key.getText()) ||
                     Pattern.matches(".*\\p{InCyrillic}.*", wordToEncrypt.getText())){
+                    AudioClip error = new AudioClip(new File("src/source/error.mp3").toURI().toString());
+                    error.play();
                     ecnrypted.setText("you have entered wrong data");
                     ecnrypted.setFill(Color.RED);
                 }else {
                     String EWord = wordToEncrypt.getText();
                     String KWord = key.getText();
-                    Encrypt encryptinst = new Encrypt();
                     String encrypted = encryptinst.encrypt(EWord, KWord);
                     ecnrypted.setText("encrypted: " + encrypted);
                     ecnrypted.setFill(Color.color(0, 0, 0));
@@ -99,6 +106,35 @@ public class DialogWindow {
             }
         });
 
+        save.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                try{
+                    FileChooser fileChooser = new FileChooser();
+                    fileChooser.setTitle("Open file to encrypt");
+                    File file = fileChooser.showOpenDialog(Main.primaryStage);
+                    String fileName = file.getAbsolutePath();
+                    String fileBody = Files.readString(Path.of(fileName));
+
+                    String KWord = key.getText();
+                    String encryptedFileBody = encryptinst.encrypt(fileBody, KWord);
+
+                    if(key.getText() == "" || Pattern.matches(".*\\p{InCyrillic}.*", key.getText())){
+                        ecnrypted.setText("Enter a valid key");
+                        ecnrypted.setFill(Color.RED);
+                        AudioClip error = new AudioClip(new File("src/source/error.mp3").toURI().toString());
+                        error.play();
+                    }else {
+                        Files.writeString(Path.of(fileName), encryptedFileBody);
+                        ecnrypted.setText("Your file has been encrypted");
+                        ecnrypted.setFill(Color.BROWN);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
         buttonAlg.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
                 Main.newWindow.setTitle("Second Stage");
@@ -119,6 +155,9 @@ public class DialogWindow {
         keyInputWrapper.getChildren().add(keyLabel);
         keyInputWrapper.getChildren().add(key);
 
+        ButtonsWrapper.getChildren().add(encrypt);
+        ButtonsWrapper.getChildren().add(save);
+
         pane.getColumnConstraints().add(new ColumnConstraints(800));
         pane.getRowConstraints().add(new RowConstraints(75));
         pane.getRowConstraints().add(new RowConstraints(75));
@@ -127,14 +166,14 @@ public class DialogWindow {
 
         GridPane.setHalignment(wordToEncrypt, HPos.CENTER);
         GridPane.setHalignment(key, HPos.CENTER);
-        GridPane.setHalignment(encrypt, HPos.RIGHT);
+        GridPane.setHalignment(ButtonsWrapper, HPos.RIGHT);
         GridPane.setHalignment(ecnrypted, HPos.LEFT);
 
         pane.setPadding(new Insets(100, 150, 100, 150));
 
         pane.add(wordInputWrapper, 0, 0);
         pane.add(keyInputWrapper, 0, 1);
-        pane.add(encrypt, 0, 2);
+        pane.add(ButtonsWrapper, 0, 2);
         pane.add(ecnrypted, 0, 3);
 
         dialogGroup.getChildren().add(pane);
