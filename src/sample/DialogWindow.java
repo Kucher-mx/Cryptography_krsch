@@ -10,11 +10,14 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.layout.*;
 import javafx.scene.media.AudioClip;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Dialog;
@@ -85,7 +88,6 @@ public class DialogWindow {
                     ecnrypted.setText("encrypted: " + encrypted);
                     ecnrypted.setFill(Color.color(0, 0, 0));
                 }
-
             }
         });
 
@@ -175,6 +177,42 @@ public class DialogWindow {
         pane.add(keyInputWrapper, 0, 1);
         pane.add(ButtonsWrapper, 0, 2);
         pane.add(ecnrypted, 0, 3);
+
+        ContextMenu contextMenu = new ContextMenu();
+
+        MenuItem item1 = new MenuItem("Info about student");
+        item1.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                Main.newWindow.setTitle("Info about student");
+                Main.newWindow.setScene(InfoWindow.returnDialogScene());
+                Main.newWindow.setX(Main.primaryStage.getX() + 200);
+                Main.newWindow.setY(Main.primaryStage.getY() + 100);
+                Main.newWindow.show();
+            }
+        });
+        MenuItem item2 = new MenuItem("Info about algorithm");
+        item2.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                Main.newWindow.setTitle("Info about algorithm");
+                Main.newWindow.setScene(InfoAlgWindow.returnDialogScene());
+                Main.newWindow.setX(Main.primaryStage.getX() + 200);
+                Main.newWindow.setY(Main.primaryStage.getY() + 100);
+                Main.newWindow.show();
+            }
+        });
+
+        contextMenu.getItems().addAll(item1, item2);
+        dialogGroup.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
+            @Override
+            public void handle(ContextMenuEvent event) {
+                System.out.println("contextMenu");
+                contextMenu.show(dialogGroup, event.getScreenX(), event.getScreenY());
+            }
+        });
 
         dialogGroup.getChildren().add(pane);
         dialogGroup.getChildren().add(buttonPos);
