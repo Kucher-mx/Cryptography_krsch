@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.animation.FadeTransition;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -28,6 +29,7 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.awt.*;
 import java.io.*;
@@ -56,6 +58,7 @@ public class DialogWindow {
         Font fontEncrypted = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 16);
         dialogGroup = new Group();
         pane = new GridPane();
+
 
 
         wordToEncrypt.setPrefWidth(500.0);
@@ -190,6 +193,7 @@ public class DialogWindow {
                 Main.newWindow.setX(Main.primaryStage.getX() + 200);
                 Main.newWindow.setY(Main.primaryStage.getY() + 100);
                 Main.newWindow.show();
+
             }
         });
         MenuItem item2 = new MenuItem("Info about algorithm");
@@ -205,12 +209,38 @@ public class DialogWindow {
             }
         });
 
-        contextMenu.getItems().addAll(item1, item2);
+        MenuItem item3 = new MenuItem("Show");
+        item3.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                FadeTransition fadeInTransition = new FadeTransition(Duration.millis(1500), pane);
+                fadeInTransition.setFromValue(0.0);
+                fadeInTransition.setToValue(1.0);
+                fadeInTransition.play();
+            }
+        });
+
+        MenuItem item4 = new MenuItem("Hide");
+        item4.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                FadeTransition fadeOutTransition = new FadeTransition(Duration.millis(500), pane);
+                fadeOutTransition.setFromValue(1.0);
+                fadeOutTransition.setToValue(0.0);
+                fadeOutTransition.play();
+            }
+        });
+
+
+        contextMenu.getItems().addAll(item1, item2, item3, item4);
         dialogGroup.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
             @Override
             public void handle(ContextMenuEvent event) {
                 System.out.println("contextMenu");
                 contextMenu.show(dialogGroup, event.getScreenX(), event.getScreenY());
+
             }
         });
 
