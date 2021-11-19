@@ -1,30 +1,26 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.MenuItem;
-import javafx.scene.input.ContextMenuEvent;
-import javafx.stage.FileChooser;
+import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
+import javafx.scene.paint.Color;
 
 public class Main extends Application {
 
     static DialogWindow dialogWindow;
     static Stage primaryStage;
     static Stage newWindow = new Stage();
-
+    static Color BACKGROUND_COLOR = Color.YELLOW;
+    static Scene mainScene = new Scene(new Group(), 1280, 720);
 
     public static void setSetupStage() throws FileNotFoundException {
         dialogWindow = new DialogWindow();
         Main.primaryStage.setTitle("Vigenere cipher");
-        Main.primaryStage.setScene(dialogWindow.returnDialogScene());
+//        Main.primaryStage.setScene(dialogWindow.returnDialogScene());
+//        Main.primaryStage.setScene(Main.mainScene);
+        dialogWindow.setDialogScene();
         Main.primaryStage.setWidth( 1000 );
         Main.primaryStage.setHeight( 600 );
     }

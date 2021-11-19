@@ -47,7 +47,7 @@ public class InfoDialog {
         studentInfo.setText("  \t\tЛюдва Назарій Вікторович\n" + "  Вінницький Національний Технічний Університет"
                 + "\n\t\t\t   ФІТКІ" +"\n\t\t     Кібербезпека" + "\n\t\t\t   2 курс");
         studentInfo.setFont(fontInfo);
-        Button button = new Button("Confirm");
+        Button button = new Button("Підтвердити");
 
         hbox.getChildren().addAll(avatarIV, studentInfo);
 

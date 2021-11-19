@@ -38,4 +38,17 @@ public class Encrypt {
         }
         return result;
     }
+
+    public String dencrypt(String EWord, String key) {
+        String result = "";
+        String paddedKey = padRight(key, EWord.length());
+        int i = 0;
+        char[] letters = EWord.toCharArray();
+        for (char letter : letters) {
+            int idx = (findIndex(letter) + alph.length - findIndex(paddedKey.charAt(i))) % alph.length;
+            result += alph[idx];
+            i++;
+        }
+        return result;
+    }
 }

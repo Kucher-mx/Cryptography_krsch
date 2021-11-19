@@ -30,12 +30,12 @@ public class InfoAlg {
     public static VBox vijenerImageWrapper = new VBox();
     public static GridPane pane = new GridPane();
     public InfoAlg() throws FileNotFoundException {
-        Font font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 24);
+        Font font = Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 14);
         Font fontDescr = Font.font("verdana", FontWeight.LIGHT, FontPosture.REGULAR, 14);
         labelWindow = new Label("Система шифрування Віженера");
         labelWindow.setFont(font);
 
-        vijenerImageLabel = new Label("Система шифvbhgfhfgdhfВіженера");
+        vijenerImageLabel = new Label("                                             Рис 1");
         vijenerImageLabel.setFont(font);
 
         vijenerImage = new Image(new FileInputStream("src/source/encrypt_example.png"));
@@ -46,11 +46,11 @@ public class InfoAlg {
         vijenerImageWrapper.setLayoutY(150);
 
         descr = new Label();
-        descr.setText("Даний шифр багатоалфавітної заміни можна описати таблицею шифрування. Для російського алфавіту вона має\n" +
-                "вигляд, показаний на рис.2. Таблиця Віжинера використовується  для шифрування і розшифрування.\n" +
-                "Таблиця має три входи:\n" +
-                "- верхній рядок підкреслених символів, що застосовується для зчитування чергової літери \n" +
-                "- початкового відкритого тексту\n" +
+        descr.setText("Даний шифр багатоалфавітної заміни можна описати таблицею шифрування. Для латинського алфавіту вона має\n" +
+                "вигляд, показаний на Рис 1. Таблиця Віжинера використовується  для шифрування і розшифрування.\n" +
+                "Таблиця має два входи:\n" +
+                "- верхній рядок підкреслених символів, що застосовується для зчитування чергової літери " +
+                "початкового відкритого тексту\n" +
                 "- крайній лівий стовпець ключа\n" +
                 "Послідовність ключів зазвичай отримують з числових значень літер ключового слова. При шифруванні початкового\n" +
                 "повідомлення його вписують в рядок, а під ним записують ключове слово або фразу. Якщо ключ виявився коротшим,\n" +
@@ -59,7 +59,7 @@ public class InfoAlg {
                 "перетині стовпця, що визначається літерою, яка шифрується, і рядка, що відповідає значенню ключа. ");
         descr.setFont(fontDescr);
 
-        Button button = new Button("Confirm");
+        Button button = new Button("Підтвердити");
 
 
         pane.getColumnConstraints().add(new ColumnConstraints(900));
