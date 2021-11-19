@@ -1,12 +1,16 @@
 package sample;
 
 import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -310,6 +314,8 @@ public class DialogWindow {
         pane.add(keyInputWrapper, 0, 1);
         pane.add(ButtonsWrapper, 0, 2);
         pane.add(ecnrypted, 0, 3);
+
+
 
         ContextMenu contextMenu = new ContextMenu();
 
