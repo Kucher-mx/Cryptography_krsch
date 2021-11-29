@@ -1,19 +1,9 @@
 package sample;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.geometry.VPos;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.io.FileNotFoundException;
 import javafx.scene.paint.Color;
-import javafx.util.Duration;
 
 public class Main extends Application {
 

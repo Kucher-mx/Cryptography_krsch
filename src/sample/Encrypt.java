@@ -1,7 +1,10 @@
 package sample;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Encrypt {
-    static final char[] alph = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+    final static ArrayList<Character> alph = new ArrayList<>(Arrays.asList('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'));
 
     public static String padRight(String s, int n) {
         String res = "";
@@ -18,8 +21,8 @@ public class Encrypt {
     }
 
     public static int findIndex(char c) {
-        for (int i = 0; i < alph.length; i++) {
-            if (alph[i] == c) {
+        for (int i = 0; i < alph.size(); i++) {
+            if (alph.get(i) == c) {
                 return i;
             }
         }
@@ -32,8 +35,8 @@ public class Encrypt {
         int i = 0;
         char[] letters = EWord.toCharArray();
         for (char letter : letters) {
-            int idx = (findIndex(letter) + findIndex(paddedKey.charAt(i))) % alph.length;
-            result += alph[idx];
+            int idx = (findIndex(letter) + findIndex(paddedKey.charAt(i))) % alph.size();
+            result += alph.get(idx);
             i++;
         }
         return result;
@@ -45,8 +48,8 @@ public class Encrypt {
         int i = 0;
         char[] letters = EWord.toCharArray();
         for (char letter : letters) {
-            int idx = (findIndex(letter) + alph.length - findIndex(paddedKey.charAt(i))) % alph.length;
-            result += alph[idx];
+            int idx = (findIndex(letter) + alph.size() - findIndex(paddedKey.charAt(i))) % alph.size();
+            result += alph.get(idx);
             i++;
         }
         return result;
